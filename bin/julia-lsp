@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$0")"
+PKG_ROOT=$(realpath "${SCRIPT_DIR}/..")
+
+# main.jl args
+export JULIA_ENVIRONMENT_PATH=$1
+export DEBUG="--debug=no"
+export IGNORE_TELEMETRY_CRASH=""
+export OLD_DEPOT_PATH=${JULIA_DEPOT_PATH:-""}
+export STORAGE_PATH="${JULIA_LSP_STORAGE:-${PKG_ROOT}/store}"
+export USE_SYMSERVER_DOWNLOADS="download"
+export SYMSERVER_UPSTREAM="https://www.julia-vscode.org/symbolcache"
+export DETACHED="--detached=no"
+
+export JULIA_LOAD_PATH=":"
+export JULIA_DEPOT_PATH="${PKG_ROOT}/store/lsdepot/v1"
+
+exec julia --startup-file=no --history-file=no --depwarn=no "${PKG_ROOT}/extension/scripts/languageserver/main.jl" "$JULIA_ENVIRONMENT_PATH" "$DEBUG" "$IGNORE_TELEMETRY_CRASH" "$OLD_DEPOT_PATH" "$STORAGE_PATH" "$USE_SYMSERVER_DOWNLOADS" "$SYMSERVER_UPSTREAM" "$DETACHED"
