@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+function help {
+    cat <<EOF
+Usage: julia-lsp <julia-env-path>
+EOF
+}
+
+if [[ -z $1 ]]; then
+    help
+    exit 1
+fi
+
 set -euo pipefail
 
 SCRIPT_DIR="$(dirname "$0")"
