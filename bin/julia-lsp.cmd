@@ -12,7 +12,7 @@ set "USE_SYMSERVER_DOWNLOADS=download"
 set "SYMSERVER_UPSTREAM=https://www.julia-vscode.org/symbolcache"
 set "DETACHED=--detached=no"
 
-set "JULIA_LOAD_PATH=:"
+set "JULIA_LOAD_PATH=;"
 set "JULIA_DEPOT_PATH=%PKG_ROOT%\store\lsdepot\v1"
 
 julia --startup-file=no --history-file=no --depwarn=no "%PKG_ROOT%\extension\scripts\languageserver\main.jl" "%JULIA_ENVIRONMENT_PATH%" "%DEBUG%" "%IGNORE_TELEMETRY_CRASH%" "%OLD_DEPOT_PATH%" "%STORAGE_PATH%" "%USE_SYMSERVER_DOWNLOADS%" "%SYMSERVER_UPSTREAM%" "%DETACHED%"
