@@ -26,8 +26,12 @@ export DEBUG="--debug=no"
 export IGNORE_TELEMETRY_CRASH=""
 export OLD_DEPOT_PATH=${JULIA_DEPOT_PATH:-""}
 export STORAGE_PATH="${JULIA_LSP_STORAGE:-${PKG_ROOT}/store}"
-export USE_SYMSERVER_DOWNLOADS="download"
-export SYMSERVER_UPSTREAM="https://www.julia-vscode.org/symbolcache"
+if [[ ${SYMBOL_CACHE_DOWNLOAD:-1} != 0 ]]; then
+    export USE_SYMSERVER_DOWNLOADS="download"
+else
+    export USE_SYMSERVER_DOWNLOADS="local"
+fi
+export SYMSERVER_UPSTREAM="${SYMBOL_SERVER:-https://www.julia-vscode.org/symbolcache}"
 export DETACHED="--detached=no"
 
 export JULIA_LOAD_PATH=":"

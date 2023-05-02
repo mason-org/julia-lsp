@@ -7,9 +7,21 @@ set "JULIA_ENVIRONMENT_PATH=%1"
 set "DEBUG=--debug=no"
 set "IGNORE_TELEMETRY_CRASH="
 set "OLD_DEPOT_PATH=%JULIA_DEPOT_PATH%"
-if "%JULIA_LSP_STORAGE%"=="" set "STORAGE_PATH=%PKG_ROOT%\store" || set "STORAGE_PATH=%JULIA_LSP_STORAGE%"
-set "USE_SYMSERVER_DOWNLOADS=download"
-set "SYMSERVER_UPSTREAM=https://www.julia-vscode.org/symbolcache"
+IF "%JULIA_LSP_STORAGE%"=="" (
+    set "STORAGE_PATH=%PKG_ROOT%\store"
+) ELSE (
+    set "STORAGE_PATH=%JULIA_LSP_STORAGE%"
+)
+IF "%SYMBOL_CACHE_DOWNLOAD%"=="0" (
+    set "USE_SYMSERVER_DOWNLOADS=local"
+) ELSE (
+    set "USE_SYMSERVER_DOWNLOADS=download"
+)
+IF "%SYMBOL_SERVER%"=="" (
+    set "SYMSERVER_UPSTREAM=https://www.julia-vscode.org/symbolcache"
+) ELSE (
+    set "SYMSERVER_UPSTREAM=%SYMBOL_SERVER%"
+)
 set "DETACHED=--detached=no"
 
 set "JULIA_LOAD_PATH=;"
