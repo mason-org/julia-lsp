@@ -22,9 +22,12 @@ IF "%SYMBOL_SERVER%"=="" (
 ) ELSE (
     set "SYMSERVER_UPSTREAM=%SYMBOL_SERVER%"
 )
-set "DETACHED=--detached=no"
+IF "%JULIA_LSP_JULIA_BIN%"=="" (
+    set "JULIA_LSP_JULIA_BIN=julia"
+)
 
+set "DETACHED=--detached=no"
 set "JULIA_LOAD_PATH=;"
 set "JULIA_DEPOT_PATH=%PKG_ROOT%\store\lsdepot\v1"
 
-julia --startup-file=no --history-file=no --depwarn=no "%PKG_ROOT%\extension\scripts\languageserver\main.jl" "%JULIA_ENVIRONMENT_PATH%" "%DEBUG%" "%IGNORE_TELEMETRY_CRASH%" "%OLD_DEPOT_PATH%" "%STORAGE_PATH%" "%USE_SYMSERVER_DOWNLOADS%" "%SYMSERVER_UPSTREAM%" "%DETACHED%"
+"%JULIA_LSP_JULIA_BIN%" --startup-file=no --history-file=no --depwarn=no "%PKG_ROOT%\extension\scripts\languageserver\main.jl" "%JULIA_ENVIRONMENT_PATH%" "%DEBUG%" "%IGNORE_TELEMETRY_CRASH%" "%OLD_DEPOT_PATH%" "%STORAGE_PATH%" "%USE_SYMSERVER_DOWNLOADS%" "%SYMSERVER_UPSTREAM%" "%DETACHED%"

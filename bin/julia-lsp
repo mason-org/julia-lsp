@@ -36,5 +36,7 @@ export DETACHED="--detached=no"
 
 export JULIA_LOAD_PATH=":"
 export JULIA_DEPOT_PATH="${PKG_ROOT}/store/lsdepot/v1"
+export JULIAUP_CHANNEL="release"
 
-exec julia --startup-file=no --history-file=no --depwarn=no "${PKG_ROOT}/extension/scripts/languageserver/main.jl" "$JULIA_ENVIRONMENT_PATH" "$DEBUG" "$IGNORE_TELEMETRY_CRASH" "$OLD_DEPOT_PATH" "$STORAGE_PATH" "$USE_SYMSERVER_DOWNLOADS" "$SYMSERVER_UPSTREAM" "$DETACHED"
+: ${JULIA_LSP_JULIA_BIN:=julia}
+exec $JULIA_LSP_JULIA_BIN --startup-file=no --history-file=no --depwarn=no "${PKG_ROOT}/extension/scripts/languageserver/main.jl" "$JULIA_ENVIRONMENT_PATH" "$DEBUG" "$IGNORE_TELEMETRY_CRASH" "$OLD_DEPOT_PATH" "$STORAGE_PATH" "$USE_SYMSERVER_DOWNLOADS" "$SYMSERVER_UPSTREAM" "$DETACHED"
