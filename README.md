@@ -37,3 +37,12 @@ $ SYMBOL_SERVER=https://symbol-server julia-lsp "<julia_env_path>"
 ```
 
 [modeline]: vim:tw=120:et:sw=4
+
+## Configurating the Julia binary
+
+By default, the `julia` binary found in PATH will be used to run the server. You can override this by setting the
+`JULIA_LSP_JULIA_BIN` environment variable, for example:
+
+```sh
+$ JULIA_LSP_JULIA_BIN=~/julia-1.9.3/bin/julia julia-lsp "<julia_env_path>"
+```
